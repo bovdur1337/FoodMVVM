@@ -1,4 +1,4 @@
-package com.example.foodmvvm.main.util
+package com.example.foodmvvm.main.models
 
 data class Meal(
     val dateModified: String,

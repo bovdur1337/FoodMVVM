@@ -1,6 +1,6 @@
 package com.example.foodmvvm.main.retrofit
 
-import com.example.foodmvvm.main.util.MealList
+import com.example.foodmvvm.main.models.MealList
 import retrofit2.Call
 import retrofit2.http.GET
 
