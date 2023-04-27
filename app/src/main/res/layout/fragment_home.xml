@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:background="@color/white" />
+                    tools:background="@color/accent" />
             </androidx.cardview.widget.CardView>
 
 
@@ -111,10 +111,11 @@
                 android:layout_height="@dimen/_90sdp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="25dp"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_popularItems" />
+                app:layout_constraintTop_toBottomOf="@id/tv_popularItems"
+
+                tools:listitem="@layout/popular_item"/>
 
 
             <!--         all categories block-->
