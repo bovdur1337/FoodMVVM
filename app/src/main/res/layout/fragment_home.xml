@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".main.ui.activities.MainActivity">
-    
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-         
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-
-
-    <!--        header-->
+            <!--        header-->
             <LinearLayout
                 android:id="@+id/linear_header"
                 android:layout_width="match_parent"
@@ -40,7 +38,7 @@
                     android:text="Home"
                     android:textColor="@color/accent"
                     android:textSize="30sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/iv_search"
@@ -48,12 +46,11 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_search"
-                    app:tint="@color/black"/>
+                    app:tint="@color/black" />
             </LinearLayout>
 
 
-
-    <!--        what you would like to eat block-->
+            <!--        what you would like to eat block-->
             <TextView
                 android:id="@+id/tv_whatToEat"
                 android:layout_width="wrap_content"
@@ -73,14 +70,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_170sdp"
                 android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
 
+                app:cardElevation="0dp"
                 app:cardCornerRadius="15dp"
                 app:cardUseCompatPadding="true"
 
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_whatToEat">
 
                 <ImageView
@@ -88,12 +86,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:background="@color/accent" />
+                    tools:background="@color/white" />
             </androidx.cardview.widget.CardView>
 
 
-
-    <!--        popular items block-->
+            <!--        popular items block-->
             <TextView
                 android:id="@+id/tv_popularItems"
                 android:layout_width="wrap_content"
@@ -105,23 +102,22 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
 
-                app:layout_constraintTop_toBottomOf="@id/cv_randomMeal"
-                app:layout_constraintStart_toStartOf="@id/tv_whatToEat"/>
+                app:layout_constraintStart_toStartOf="@id/tv_whatToEat"
+                app:layout_constraintTop_toBottomOf="@id/cv_randomMeal" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_popularItems"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_90sdp"
                 android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_popularItems"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_popularItems" />
 
 
-
-    <!--         all categories block-->
+            <!--         all categories block-->
             <TextView
                 android:id="@+id/tv_allCategories"
                 android:layout_width="wrap_content"
@@ -133,16 +129,17 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
 
-                app:layout_constraintTop_toBottomOf="@id/rv_popularItems"
-                app:layout_constraintStart_toStartOf="@id/tv_whatToEat"/>
+                app:layout_constraintStart_toStartOf="@id/tv_whatToEat"
+                app:layout_constraintTop_toBottomOf="@id/rv_popularItems" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginEnd="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="25dp"
 
+                app:cardElevation="0dp"
                 app:cardCornerRadius="10dp"
                 app:cardUseCompatPadding="true"
 
@@ -158,4 +155,4 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
