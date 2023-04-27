@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foodmvvm.databinding.FragmentHomeBinding
 import com.example.foodmvvm.main.adapters.PopularItemsAdapter
-import com.example.foodmvvm.main.models.CategoryMeals
+import com.example.foodmvvm.main.models.PopularCategoryMeals
 import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.ui.activities.MealActivity
 import com.example.foodmvvm.main.viewmodel.HomeViewModel
@@ -61,7 +61,6 @@ class HomeFragment : Fragment() {
         onPopularItemClick()
     }
 
-
     private fun preparePopularItemsRV(){
         binding.rvPopularItems.apply {
             layoutManager = LinearLayoutManager(
@@ -94,7 +93,7 @@ class HomeFragment : Fragment() {
 
     private fun observePopularItems(){
         viewModel.popularItemsLD.observe(viewLifecycleOwner, Observer { mealsList ->
-            popularItemsAdapter.setMeals(mealsList = mealsList as ArrayList<CategoryMeals>)
+            popularItemsAdapter.setMeals(mealsList = mealsList as ArrayList<PopularCategoryMeals>)
         })
     }
 

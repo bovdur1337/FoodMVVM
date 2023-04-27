@@ -1,6 +1,6 @@
 package com.example.foodmvvm.main.retrofit
 
-import com.example.foodmvvm.main.models.CategoryList
+import com.example.foodmvvm.main.models.PopularCategoryList
 import com.example.foodmvvm.main.models.MealList
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,5 +15,5 @@ interface MealApi {
     fun getMealDetailsById(@Query("i") id: String): Call<MealList>
 
     @GET("filter.php?")
-    fun getPopularItems(@Query("c") categoryName: String): Call<CategoryList>
+    fun getPopularItems(@Query("c") categoryName: String): Call<PopularCategoryList>
 }

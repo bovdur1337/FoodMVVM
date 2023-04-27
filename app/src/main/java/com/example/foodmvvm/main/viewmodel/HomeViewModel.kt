@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.foodmvvm.main.models.CategoryList
-import com.example.foodmvvm.main.models.CategoryMeals
+import com.example.foodmvvm.main.models.PopularCategoryList
+import com.example.foodmvvm.main.models.PopularCategoryMeals
 import com.example.foodmvvm.main.retrofit.RetrofitInstance
 import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.models.MealList
@@ -18,9 +18,8 @@ class HomeViewModel(): ViewModel() {
     private var _randomMealLD = MutableLiveData<Meal>()
     val randomMealLD: LiveData<Meal> = _randomMealLD
 
-    private var _popularItemsLD = MutableLiveData<List<CategoryMeals>>()
-    val popularItemsLD: LiveData<List<CategoryMeals>> = _popularItemsLD
-
+    private var _popularItemsLD = MutableLiveData<List<PopularCategoryMeals>>()
+    val popularItemsLD: LiveData<List<PopularCategoryMeals>> = _popularItemsLD
 
     init {
         getRandomMeal()
@@ -44,14 +43,14 @@ class HomeViewModel(): ViewModel() {
     }
 
     fun getPopularItems(){
-        RetrofitInstance.api.getPopularItems("Beef").enqueue(object : Callback<CategoryList>{
-            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+        RetrofitInstance.api.getPopularItems("Beef").enqueue(object : Callback<PopularCategoryList>{
+            override fun onResponse(call: Call<PopularCategoryList>, response: Response<PopularCategoryList>) {
                 if (response.body() != null){
                     _popularItemsLD.value = response.body()!!.meals
                 }
             }
 
-            override fun onFailure(call: Call<CategoryList>, t: Throwable) {
+            override fun onFailure(call: Call<PopularCategoryList>, t: Throwable) {
                 Log.d("HomeFragment", t.message.toString())
             }
         })
