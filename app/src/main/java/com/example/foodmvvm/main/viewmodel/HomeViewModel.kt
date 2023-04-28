@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.foodmvvm.main.models.Category
+import com.example.foodmvvm.main.models.CategoryList
 import com.example.foodmvvm.main.models.PopularCategoryList
 import com.example.foodmvvm.main.models.PopularCategoryMeals
 import com.example.foodmvvm.main.retrofit.RetrofitInstance
@@ -21,9 +23,13 @@ class HomeViewModel(): ViewModel() {
     private var _popularItemsLD = MutableLiveData<List<PopularCategoryMeals>>()
     val popularItemsLD: LiveData<List<PopularCategoryMeals>> = _popularItemsLD
 
+    private var _categoriesListLD = MutableLiveData<List<Category>>()
+    val categoriesListLD: LiveData<List<Category>> = _categoriesListLD
+
     init {
         getRandomMeal()
         getPopularItems()
+        getCategories()
     }
 
     fun getRandomMeal(){
@@ -51,6 +57,20 @@ class HomeViewModel(): ViewModel() {
             }
 
             override fun onFailure(call: Call<PopularCategoryList>, t: Throwable) {
+                Log.d("HomeFragment", t.message.toString())
+            }
+        })
+    }
+
+    fun getCategories(){
+        RetrofitInstance.api.getCategories().enqueue(object : Callback<CategoryList>{
+            override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
+                if (response.body() != null){
+                    _categoriesListLD.value = response.body()!!.categories
+                }
+            }
+
+            override fun onFailure(call: Call<CategoryList>, t: Throwable) {
                 Log.d("HomeFragment", t.message.toString())
             }
         })

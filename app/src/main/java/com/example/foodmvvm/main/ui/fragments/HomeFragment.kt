@@ -2,15 +2,18 @@ package com.example.foodmvvm.main.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.foodmvvm.databinding.FragmentHomeBinding
+import com.example.foodmvvm.main.adapters.CategoriesAdapter
 import com.example.foodmvvm.main.adapters.PopularItemsAdapter
 import com.example.foodmvvm.main.models.PopularCategoryMeals
 import com.example.foodmvvm.main.models.Meal
@@ -22,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var randomMeal: Meal
     private lateinit var popularItemsAdapter: PopularItemsAdapter
+    private lateinit var categoriesAdapter: CategoriesAdapter
     private val viewModel: HomeViewModel by viewModels()
 
     companion object{
@@ -33,6 +37,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         popularItemsAdapter = PopularItemsAdapter()
+        categoriesAdapter = CategoriesAdapter()
     }
 
     override fun onCreateView(
@@ -49,6 +54,7 @@ class HomeFragment : Fragment() {
 
         //preparing our rv
         preparePopularItemsRV()
+        prepareCategoriesRV()
 
         //observing our random meal image
         observeRandomMeal()
@@ -59,6 +65,9 @@ class HomeFragment : Fragment() {
         observePopularItems()
         //adding method for clicking on popular item
         onPopularItemClick()
+
+        //observing our categories list
+        observeCategoriesListLD()
     }
 
     private fun preparePopularItemsRV(){
@@ -104,6 +113,24 @@ class HomeFragment : Fragment() {
             intent.putExtra(MEAL_NAME, meal.strMeal)
             intent.putExtra(MEAL_THUMB, meal.strMealThumb)
             startActivity(intent)
+        }
+    }
+
+    private fun observeCategoriesListLD(){
+        viewModel.categoriesListLD.observe(viewLifecycleOwner, Observer { categories ->
+                categoriesAdapter.setCategoryList(categories)
+        })
+    }
+
+    private fun prepareCategoriesRV(){
+        binding.rvCategories.apply {
+            layoutManager = GridLayoutManager(
+                context,
+                3,
+                GridLayoutManager.VERTICAL,
+                false
+            )
+            adapter = categoriesAdapter
         }
     }
 }
