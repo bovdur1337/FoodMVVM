@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodmvvm.main.models.Category
 import com.example.foodmvvm.main.models.CategoryList
-import com.example.foodmvvm.main.models.PopularCategoryList
-import com.example.foodmvvm.main.models.PopularCategoryMeals
+import com.example.foodmvvm.main.models.MealsByCategoryList
+import com.example.foodmvvm.main.models.MealsByCategory
 import com.example.foodmvvm.main.retrofit.RetrofitInstance
 import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.models.MealList
@@ -20,8 +20,8 @@ class HomeViewModel(): ViewModel() {
     private var _randomMealLD = MutableLiveData<Meal>()
     val randomMealLD: LiveData<Meal> = _randomMealLD
 
-    private var _popularItemsLD = MutableLiveData<List<PopularCategoryMeals>>()
-    val popularItemsLD: LiveData<List<PopularCategoryMeals>> = _popularItemsLD
+    private var _popularItemsLD = MutableLiveData<List<MealsByCategory>>()
+    val popularItemsLD: LiveData<List<MealsByCategory>> = _popularItemsLD
 
     private var _categoriesListLD = MutableLiveData<List<Category>>()
     val categoriesListLD: LiveData<List<Category>> = _categoriesListLD
@@ -49,14 +49,14 @@ class HomeViewModel(): ViewModel() {
     }
 
     fun getPopularItems(){
-        RetrofitInstance.api.getPopularItems("Beef").enqueue(object : Callback<PopularCategoryList>{
-            override fun onResponse(call: Call<PopularCategoryList>, response: Response<PopularCategoryList>) {
+        RetrofitInstance.api.getPopularItems("Beef").enqueue(object : Callback<MealsByCategoryList>{
+            override fun onResponse(call: Call<MealsByCategoryList>, response: Response<MealsByCategoryList>) {
                 if (response.body() != null){
                     _popularItemsLD.value = response.body()!!.meals
                 }
             }
 
-            override fun onFailure(call: Call<PopularCategoryList>, t: Throwable) {
+            override fun onFailure(call: Call<MealsByCategoryList>, t: Throwable) {
                 Log.d("HomeFragment", t.message.toString())
             }
         })
