@@ -16,17 +16,26 @@ import com.example.foodmvvm.main.viewmodel.CategoryMealsViewModel
 
 class CategoryMealsActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityCategoryMealsBinding
-    lateinit var categoryMealsAdapter: CategoryMealsAdapter
-    val viewModel: CategoryMealsViewModel by viewModels()
+    private lateinit var binding: ActivityCategoryMealsBinding
+    private lateinit var categoryMealsAdapter: CategoryMealsAdapter
+
+    private val viewModel: CategoryMealsViewModel by viewModels()
+
+    private lateinit var categoryName: String
+    private lateinit var categoryMealsCount: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryMealsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        categoryName = intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!
+
+        //preparing our rv
         prepareMealsRV()
-        viewModel.getMealsByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
+        //getting our meals
+        getMealsByCategory()
+        //observing mealsLD for changes
         observeMealsListLD()
     }
 
@@ -44,8 +53,14 @@ class CategoryMealsActivity : AppCompatActivity() {
         }
     }
 
+    private fun getMealsByCategory() {
+        viewModel.getMealsByCategory(categoryName)
+    }
+
     private fun observeMealsListLD(){
         viewModel.mealsLD.observe(this, Observer { mealsList ->
+            categoryMealsCount = mealsList.size.toString()
+            binding.tvCategoryCount.text = "$categoryName: $categoryMealsCount meals found"
             categoryMealsAdapter.setMealsList(mealsList)
         })
     }

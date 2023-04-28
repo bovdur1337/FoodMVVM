@@ -10,10 +10,10 @@
         android:id="@+id/tvCategoryCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:padding="10dp"
 
         tools:text="Beef: 12 meals found"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/black"
 
