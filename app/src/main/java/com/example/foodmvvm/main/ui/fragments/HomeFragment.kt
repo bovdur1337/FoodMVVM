@@ -2,7 +2,6 @@ package com.example.foodmvvm.main.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +14,10 @@ import com.bumptech.glide.Glide
 import com.example.foodmvvm.databinding.FragmentHomeBinding
 import com.example.foodmvvm.main.adapters.CategoriesAdapter
 import com.example.foodmvvm.main.adapters.PopularItemsAdapter
-import com.example.foodmvvm.main.models.PopularCategoryMeals
+import com.example.foodmvvm.main.models.Category
+import com.example.foodmvvm.main.models.MealsByCategory
 import com.example.foodmvvm.main.models.Meal
+import com.example.foodmvvm.main.ui.activities.CategoryMealsActivity
 import com.example.foodmvvm.main.ui.activities.MealActivity
 import com.example.foodmvvm.main.viewmodel.HomeViewModel
 
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
         const val MEAL_ID = "food.mealId"
         const val MEAL_NAME = "food.mealName"
         const val MEAL_THUMB = "food.mealThumb"
+        const val CATEGORY_NAME = "food.categoryName"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +70,7 @@ class HomeFragment : Fragment() {
 
         //observing our categories list
         observeCategoriesListLD()
+        onCategoryClick()
     }
 
     private fun preparePopularItemsRV(){
@@ -102,7 +105,7 @@ class HomeFragment : Fragment() {
 
     private fun observePopularItems(){
         viewModel.popularItemsLD.observe(viewLifecycleOwner, Observer { mealsList ->
-            popularItemsAdapter.setMeals(mealsList = mealsList as ArrayList<PopularCategoryMeals>)
+            popularItemsAdapter.setMeals(mealsList = mealsList as ArrayList<MealsByCategory>)
         })
     }
 
@@ -131,6 +134,14 @@ class HomeFragment : Fragment() {
                 false
             )
             adapter = categoriesAdapter
+        }
+    }
+
+    private fun onCategoryClick(){
+        categoriesAdapter.onItemClick = { category ->
+            val intent = Intent(activity, CategoryMealsActivity::class.java)
+            intent.putExtra(CATEGORY_NAME, category.strCategory)
+            startActivity(intent)
         }
     }
 }
