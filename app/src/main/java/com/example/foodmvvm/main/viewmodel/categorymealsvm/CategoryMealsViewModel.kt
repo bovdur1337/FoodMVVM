@@ -1,4 +1,4 @@
-package com.example.foodmvvm.main.viewmodel
+package com.example.foodmvvm.main.viewmodel.categorymealsvm
 
 import android.util.Log
 import androidx.lifecycle.LiveData

@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".main.ui.activities.MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavMeals"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="favorites" />
+
+        tools:listitem="@layout/meal_item"/>
 
 </FrameLayout>

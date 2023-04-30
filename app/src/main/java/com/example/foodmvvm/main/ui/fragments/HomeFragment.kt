@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,12 +13,12 @@ import com.bumptech.glide.Glide
 import com.example.foodmvvm.databinding.FragmentHomeBinding
 import com.example.foodmvvm.main.adapters.CategoriesAdapter
 import com.example.foodmvvm.main.adapters.PopularItemsAdapter
-import com.example.foodmvvm.main.models.Category
 import com.example.foodmvvm.main.models.MealsByCategory
 import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.ui.activities.CategoryMealsActivity
+import com.example.foodmvvm.main.ui.activities.MainActivity
 import com.example.foodmvvm.main.ui.activities.MealActivity
-import com.example.foodmvvm.main.viewmodel.HomeViewModel
+import com.example.foodmvvm.main.viewmodel.homevm.HomeViewModel
 
 class HomeFragment : Fragment() {
 
@@ -27,7 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var randomMeal: Meal
     private lateinit var popularItemsAdapter: PopularItemsAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
-    private val viewModel: HomeViewModel by viewModels()
+    private lateinit var viewModel: HomeViewModel
 
     companion object{
         const val MEAL_ID = "food.mealId"
@@ -38,6 +37,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = (activity as MainActivity).viewModel
         popularItemsAdapter = PopularItemsAdapter()
         categoriesAdapter = CategoriesAdapter()
     }

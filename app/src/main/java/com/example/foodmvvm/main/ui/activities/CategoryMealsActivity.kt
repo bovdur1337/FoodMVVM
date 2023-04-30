@@ -2,17 +2,13 @@ package com.example.foodmvvm.main.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.foodmvvm.R
 import com.example.foodmvvm.databinding.ActivityCategoryMealsBinding
-import com.example.foodmvvm.databinding.ActivityMealBinding
 import com.example.foodmvvm.main.adapters.CategoryMealsAdapter
 import com.example.foodmvvm.main.ui.fragments.HomeFragment
-import com.example.foodmvvm.main.viewmodel.CategoryMealsViewModel
+import com.example.foodmvvm.main.viewmodel.categorymealsvm.CategoryMealsViewModel
 
 class CategoryMealsActivity : AppCompatActivity() {
 

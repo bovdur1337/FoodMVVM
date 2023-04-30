@@ -1,9 +1,10 @@
-package com.example.foodmvvm.main.viewmodel
+package com.example.foodmvvm.main.viewmodel.homevm
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.foodmvvm.main.db.MealDatabase
 import com.example.foodmvvm.main.models.Category
 import com.example.foodmvvm.main.models.CategoryList
 import com.example.foodmvvm.main.models.MealsByCategoryList
@@ -15,7 +16,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel(): ViewModel() {
+class HomeViewModel(
+    private val mealDatabase: MealDatabase
+): ViewModel() {
 
     private var _randomMealLD = MutableLiveData<Meal>()
     val randomMealLD: LiveData<Meal> = _randomMealLD
@@ -25,6 +28,9 @@ class HomeViewModel(): ViewModel() {
 
     private var _categoriesListLD = MutableLiveData<List<Category>>()
     val categoriesListLD: LiveData<List<Category>> = _categoriesListLD
+
+    private var _favMealsLD = mealDatabase.mealDao().getAllMeals()
+    val favMeals: LiveData<List<Meal>> = _favMealsLD
 
     init {
         getRandomMeal()

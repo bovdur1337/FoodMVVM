@@ -1,24 +1,20 @@
 package com.example.foodmvvm.main.ui.activities
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.foodmvvm.R
 import com.example.foodmvvm.databinding.ActivityMealBinding
 import com.example.foodmvvm.main.db.MealDatabase
 import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.ui.fragments.HomeFragment
-import com.example.foodmvvm.main.viewmodel.MealViewModel
-import com.example.foodmvvm.main.viewmodel.MealViewModelFactory
+import com.example.foodmvvm.main.viewmodel.mealvm.MealViewModel
+import com.example.foodmvvm.main.viewmodel.mealvm.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
 
