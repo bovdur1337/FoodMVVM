@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.foodmvvm.main.db.MealDatabase
 import com.example.foodmvvm.main.models.Category
 import com.example.foodmvvm.main.models.CategoryList
@@ -12,6 +13,7 @@ import com.example.foodmvvm.main.models.MealsByCategory
 import com.example.foodmvvm.main.retrofit.RetrofitInstance
 import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.models.MealList
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,5 +82,17 @@ class HomeViewModel(
                 Log.d("HomeFragment", t.message.toString())
             }
         })
+    }
+
+    fun deleteMealFromFavs(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().delete(meal)
+        }
+    }
+
+    fun addMealToFavs(meal: Meal){
+        viewModelScope.launch {
+            mealDatabase.mealDao().upsert(meal)
+        }
     }
 }

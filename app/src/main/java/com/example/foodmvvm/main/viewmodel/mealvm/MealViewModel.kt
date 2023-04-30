@@ -42,10 +42,4 @@ class MealViewModel(
             mealDatabase.mealDao().upsert(meal)
         }
     }
-
-    fun deleteMealFromFavs(meal: Meal){
-        viewModelScope.launch {
-            mealDatabase.mealDao().delete(meal)
-        }
-    }
 }
