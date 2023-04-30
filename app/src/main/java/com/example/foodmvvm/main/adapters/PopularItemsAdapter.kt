@@ -10,6 +10,7 @@ import com.example.foodmvvm.main.models.MealsByCategory
 class PopularItemsAdapter(): RecyclerView.Adapter<PopularItemsAdapter.PopularItemViewHolder>() {
 
     lateinit var onItemClick: ((MealsByCategory) -> Unit)
+    var onLongItemClick: ((MealsByCategory) -> Unit)? = null
     private var mealsList = ArrayList<MealsByCategory>()
 
     class PopularItemViewHolder(var binding: PopularItemBinding): RecyclerView.ViewHolder(binding.root)
@@ -33,6 +34,10 @@ class PopularItemsAdapter(): RecyclerView.Adapter<PopularItemsAdapter.PopularIte
             .into(holder.binding.ivPopularItem)
 
         holder.itemView.setOnClickListener{ onItemClick.invoke(mealsList[position]) }
+        holder.itemView.setOnLongClickListener{
+            onLongItemClick?.invoke(mealsList[position])
+            true
+        }
     }
 
     override fun getItemCount(): Int {

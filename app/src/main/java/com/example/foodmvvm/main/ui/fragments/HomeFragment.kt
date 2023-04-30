@@ -18,6 +18,7 @@ import com.example.foodmvvm.main.models.Meal
 import com.example.foodmvvm.main.ui.activities.CategoryMealsActivity
 import com.example.foodmvvm.main.ui.activities.MainActivity
 import com.example.foodmvvm.main.ui.activities.MealActivity
+import com.example.foodmvvm.main.ui.fragments.bottomsheet.MealBottomSheetFragment
 import com.example.foodmvvm.main.viewmodel.homevm.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -70,7 +71,11 @@ class HomeFragment : Fragment() {
 
         //observing our categories list
         observeCategoriesListLD()
+        //adding method for clicking on category
         onCategoryClick()
+
+        //adding method for long click on popular items
+        onPopularLongClick()
     }
 
     private fun preparePopularItemsRV(){
@@ -142,6 +147,13 @@ class HomeFragment : Fragment() {
             val intent = Intent(activity, CategoryMealsActivity::class.java)
             intent.putExtra(CATEGORY_NAME, category.strCategory)
             startActivity(intent)
+        }
+    }
+
+    private fun onPopularLongClick(){
+        popularItemsAdapter.onLongItemClick = { meal ->
+            val mealBsFragment = MealBottomSheetFragment.newInstance(meal.idMeal)
+            mealBsFragment.show(childFragmentManager, "Meal Info")
         }
     }
 }
