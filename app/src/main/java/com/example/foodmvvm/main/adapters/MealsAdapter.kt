@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.foodmvvm.databinding.MealItemBinding
 import com.example.foodmvvm.main.models.Meal
 
-class FavoriteMealsAdapter: RecyclerView.Adapter<FavoriteMealsAdapter.FavoritesMealsAdapterViewHolder>() {
+class MealsAdapter: RecyclerView.Adapter<MealsAdapter.FavoritesMealsAdapterViewHolder>() {
 
     inner class FavoritesMealsAdapterViewHolder(val binding: MealItemBinding): ViewHolder(binding.root)
 

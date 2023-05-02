@@ -2,14 +2,17 @@ package com.example.foodmvvm.main.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.foodmvvm.R
 import com.example.foodmvvm.databinding.FragmentHomeBinding
 import com.example.foodmvvm.main.adapters.CategoriesAdapter
 import com.example.foodmvvm.main.adapters.PopularItemsAdapter
@@ -76,6 +79,9 @@ class HomeFragment : Fragment() {
 
         //adding method for long click on popular items
         onPopularLongClick()
+
+        //adding method for click on search icon
+        onSearchIconClick()
     }
 
     private fun preparePopularItemsRV(){
@@ -154,6 +160,13 @@ class HomeFragment : Fragment() {
         popularItemsAdapter.onLongItemClick = { meal ->
             val mealBsFragment = MealBottomSheetFragment.newInstance(meal.idMeal)
             mealBsFragment.show(childFragmentManager, "Meal Info")
+        }
+    }
+
+    private fun onSearchIconClick(){
+        binding.ivSearch.setOnClickListener{
+            Log.d("test", "Teleport")
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
     }
 }

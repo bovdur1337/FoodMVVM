@@ -1,8 +1,6 @@
 package com.example.foodmvvm.main.ui.fragments
 
-import android.content.ClipData.Item
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,21 +10,21 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodmvvm.databinding.FragmentFavoritesBinding
-import com.example.foodmvvm.main.adapters.FavoriteMealsAdapter
+import com.example.foodmvvm.main.adapters.MealsAdapter
 import com.example.foodmvvm.main.ui.activities.MainActivity
 import com.example.foodmvvm.main.viewmodel.homevm.HomeViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class FavoritesFragment : Fragment() {
 
-    private lateinit var favoriteMealsAdapter: FavoriteMealsAdapter
+    private lateinit var favoriteMealsAdapter: MealsAdapter
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as MainActivity).viewModel
-        favoriteMealsAdapter = FavoriteMealsAdapter()
+        favoriteMealsAdapter = MealsAdapter()
     }
 
     override fun onCreateView(

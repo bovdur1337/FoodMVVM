@@ -37,6 +37,9 @@ class HomeViewModel(
     private var _bsMealLD = MutableLiveData<Meal>()
     val bsMealLD: LiveData<Meal> = _bsMealLD
 
+    private val _searchedMealsLD = MutableLiveData<List<Meal>>()
+    val searchedMealsLD: LiveData<List<Meal>> = _searchedMealsLD
+
     init {
         getRandomMeal()
         getPopularItems()
@@ -105,6 +108,21 @@ class HomeViewModel(
                 val meal = response.body()?.meals?.first()
                 meal?.let { meal ->
                     _bsMealLD.postValue(meal)
+                }
+            }
+
+            override fun onFailure(call: Call<MealList>, t: Throwable) {
+                Log.e("HomeViewModel", t.message.toString())
+            }
+        })
+    }
+
+    fun searchMeals(searchQuery: String){
+        RetrofitInstance.api.searchMeals(searchQuery).enqueue(object : Callback<MealList>{
+            override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
+                val mealsList = response.body()?.meals
+                mealsList?.let {
+                    _searchedMealsLD.postValue(it)
                 }
             }
 
